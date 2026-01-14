@@ -10,6 +10,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Debug File Sizes
+        run: |
+          ls -lah
+          ls -lah extracted/ || true
 
       - name: Set up Python
         uses: actions/setup-python@v5
