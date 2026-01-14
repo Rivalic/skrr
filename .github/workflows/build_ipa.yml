@@ -1,0 +1,27 @@
+name: Build Swiggy IPA
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Build IPA
+        run: |
+          python add_otp_bypass.py swiggy.zip swiggy_otp_bypass.ipa
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: swiggy-otp-bypass-ipa
+          path: swiggy_otp_bypass.ipa
